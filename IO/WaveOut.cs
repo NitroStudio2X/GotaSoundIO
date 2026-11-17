@@ -2,7 +2,6 @@
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Threading;
-using GotaSoundIO.IO.Backend.WinMM;
 using NAudio;
 using NAudio.Wave;
 
