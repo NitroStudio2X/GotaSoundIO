@@ -1,4 +1,6 @@
-﻿using NAudio.Wave;
+﻿using GotaSoundIO.IO;
+using NAudio.CoreAudioApi;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +9,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
-using GotaSoundIO.IO;
 
 namespace GotaSoundIO.Sound.Playback {
 
@@ -34,8 +35,19 @@ namespace GotaSoundIO.Sound.Playback {
         /// <summary>
         /// A new stream player.
         /// </summary>
-        public StreamPlayer() {
-            SoundOut = new WaveOut();
+        public StreamPlayer(string device) {
+            MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
+            int i = 0;
+            foreach (var dev in enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.All))
+            {
+                if (dev.ID != device)
+                {
+                    i++;
+                }
+            }
+            WaveOut wo = new WaveOut();
+            wo.DeviceNumber = i;
+            SoundOut = wo;
         }
 
         /// <summary>
