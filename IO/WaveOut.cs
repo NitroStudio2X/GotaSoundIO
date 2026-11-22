@@ -98,9 +98,9 @@ namespace GotaSoundIO.IO
             DesiredLatency = 300;
             NumberOfBuffers = 2;
 
-            //callback = Callback;
-            //waveOutLock = new object();
-            //this.callbackInfo = callbackInfo;
+            callback = Callback;
+            waveOutLock = new object();
+            this.callbackInfo = callbackInfo;
             //callbackInfo.Connect(callback);
         }
 
